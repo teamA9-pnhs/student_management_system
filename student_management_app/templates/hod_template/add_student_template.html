@@ -51,39 +51,39 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="student_file">Add Students from text file</label>
-                                        <input type="file" class="form-control" name="student_file">
+                                        <input id="studentfile" onchange="return fileValidation()" type="file" class="form-control" name="student_file">                                        
                                     </div>
                                 
 
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Email address</label>
-                                <input type="email" class="form-control" name="email" placeholder="Enter email" id="email" >
+                                <input type="email" class="form-control disabled-custom" name="email" placeholder="Enter email" id="email" >
                             </div>
 
                             <div class="form-group">
                                 <label>Username</label>
-                                <input type="text" class="form-control" name="username" placeholder="Username" id="id_username">
+                                <input type="text" class="form-control disabled-custom" name="username" placeholder="Username" id="id_username">
                             </div>
 
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" class="form-control" name="password" placeholder="Password" id="password" >
+                                <input type="password" class="form-control disabled-custom" name="password" placeholder="Password" id="password" >
                             </div>
 
                             <div class="form-group">
                                 <label>First Name</label>
-                                <input type="text" class="form-control" name="first_name" placeholder="First Name" id="first_name">
+                                <input type="text" class="form-control disabled-custom" name="first_name" placeholder="First Name" id="first_name">
                             </div>
 
                             <div class="form-group">
                                 <label>Last Name</label>
-                                <input type="text" class="form-control" name="last_name" placeholder="Last Name" id="last_name">
+                                <input type="text" class="form-control disabled-custom" name="last_name" placeholder="Last Name" id="last_name">
                             </div>
 
                             <div class="form-group">
                                 <label>Address</label>
-                                <textarea class="form-control" name="address" placeholder="Address" id="address"></textarea>
+                                <textarea class="form-control disabled-custom" name="address" placeholder="Address" id="address"></textarea>
                             </div>
 
 
@@ -100,7 +100,7 @@
 
                             <div class="form-group">
                                 <label>Sex</label>
-                                <select class="form-control" name="sex">
+                                <select class="form-control disabled-custom" name="sex">
                                     <option> Male </option>
                                     <option> Female </option>
                                     <option> Others </option>
@@ -131,6 +131,29 @@
 
         </div><!-- /.container-fluid -->
       </section>
+      <script>
+            
+        function fileValidation(){
+            var file = document.getElementById("studentfile").value;
+            var fileinput = document.getElementById("studentfile");
+            var cells = document.getElementsByClassName("disabled-custom")
+            var allowedExtensions = /(\.txt)$/i;
+            if (!allowedExtensions.exec(file)){
+                fileinput.value='';
+                for( var i = 0 ; i < cells.length; i++){
+                    cells[i].disabled= false;
+                }
+                alert('Invalid file type')
+                return false;
+            }else{
+                for( var i = 0 ; i < cells.length; i++){
+                    cells[i].disabled= true;
+                }
+                console.log("They got disabled");
+                return true;
+            }
+        }
+  </script>
 
   {% endblock main_content %}
 
